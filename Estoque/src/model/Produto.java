@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.ProdutoDAO;
+
 public class Produto {
 	
 	private int codigo;
@@ -13,6 +15,10 @@ public class Produto {
 	
 	public static List<Produto> getLista() {
 		return lista;
+	}
+	
+	public static void gravar() {
+		new ProdutoDAO().exportaCSV(lista);
 	}
 
 	public Produto() {

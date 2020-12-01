@@ -7,6 +7,7 @@ public class Principal {
 	public static void main(String[] args) {
 		geraProdutos();
 		listaProdutos();
+		gravaProdutos();
 	}
 	
 	private static void geraProdutos() {
@@ -20,6 +21,10 @@ public class Principal {
 	
 	private static void listaProdutos() {
 		Produto.getLista().forEach(e -> System.out.println(e));
+	}
+	
+	private static void gravaProdutos() {
+		Produto.gravar();
 	}
 	
 }
