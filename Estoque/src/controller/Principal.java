@@ -1,6 +1,7 @@
 package controller;
 
 import model.Produto;
+import view.TelaProduto;
 
 public class Principal {
 	
@@ -9,7 +10,9 @@ public class Principal {
 		//listaProdutos();
 		//gravaProdutos();
 		leProdutos();
-		listaProdutos();
+		//listaProdutos();
+		new TelaProduto().setVisible(true);
+		
 	}
 	
 	private static void leProdutos() {
