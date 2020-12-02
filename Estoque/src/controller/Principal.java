@@ -5,14 +5,19 @@ import model.Produto;
 public class Principal {
 	
 	public static void main(String[] args) {
-		geraProdutos();
+		//geraProdutos();
+		//listaProdutos();
+		//gravaProdutos();
+		leProdutos();
 		listaProdutos();
-		gravaProdutos();
 	}
 	
+	private static void leProdutos() {
+		Produto.carregar();
+	}
 	private static void geraProdutos() {
 		new Produto(1,"Teclado Microsoft Natural",15,180);
-		new Produto(2,"Monitor HP IPS Full HD 23,5",5,1000);
+		new Produto(2,"Monitor HP IPS Full HD 23.5",5,1000);
 		new Produto(3,"SSD Sandisk 480GB M2",10,500);
 		new Produto(4,"Mouse Logitech Gamer",15,100);
 		new Produto(5,"Memória DDR4 2666Mhz 8GB",20,300);

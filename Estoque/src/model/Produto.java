@@ -20,6 +20,9 @@ public class Produto {
 	public static void gravar() {
 		new ProdutoDAO().exportaCSV(lista);
 	}
+	public static void carregar() {
+		lista = new ProdutoDAO().importaCSV();
+	}
 
 	public Produto() {
 		this(0,"",0,0);
