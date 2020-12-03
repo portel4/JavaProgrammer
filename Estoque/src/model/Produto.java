@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.table.DefaultTableModel;
+
 import dao.ProdutoDAO;
 
 public class Produto {
@@ -65,6 +67,23 @@ public class Produto {
 	}
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+	
+	public static DefaultTableModel getTableModel() {
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("Código");
+		modelo.addColumn("Nome");
+		modelo.addColumn("Quantidade");
+		modelo.addColumn("Valor");
+		for (Produto p: lista) {
+			String[] s = { String.valueOf(p.getCodigo()),
+						   p.getNome(),
+						   String.valueOf(p.getQtde()),
+						   String.valueOf(p.getValor())
+						 };
+			modelo.addRow(s);
+		}
+		return modelo;
 	}
 	
 	@Override

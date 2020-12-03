@@ -18,6 +18,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import model.Produto;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class TelaProduto extends JFrame {
 
@@ -26,6 +29,7 @@ public class TelaProduto extends JFrame {
 	private JTextField tfNome;
 	private JTextField tfQtde;
 	private JTextField tfValor;
+	private JTable tabela;
 
 	/**
 	 * Create the frame.
@@ -36,7 +40,7 @@ public class TelaProduto extends JFrame {
 		setLocationRelativeTo(null);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 611, 370);
+		setBounds(100, 100, 611, 373);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -50,47 +54,6 @@ public class TelaProduto extends JFrame {
 		JLabel lbTitulo = new JLabel("Cadastro de Produtos");
 		lbTitulo.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		pnTitulo.add(lbTitulo);
-		
-		JPanel pnCentral = new JPanel();
-		pnCentral.setBackground(SystemColor.menu);
-		contentPane.add(pnCentral, BorderLayout.CENTER);
-		pnCentral.setLayout(null);
-		
-		JLabel lbCodigo = new JLabel("C\u00F3digo:");
-		lbCodigo.setBounds(70, 57, 46, 14);
-		pnCentral.add(lbCodigo);
-		
-		tfCodigo = new JTextField();
-		tfCodigo.setBounds(126, 54, 57, 20);
-		pnCentral.add(tfCodigo);
-		tfCodigo.setColumns(10);
-		
-		JLabel lbNome = new JLabel("Nome:");
-		lbNome.setBounds(74, 95, 38, 14);
-		pnCentral.add(lbNome);
-		
-		tfNome = new JTextField();
-		tfNome.setBounds(126, 92, 392, 20);
-		pnCentral.add(tfNome);
-		tfNome.setColumns(10);
-		
-		JLabel lbQtde = new JLabel("Quantidade:");
-		lbQtde.setBounds(48, 139, 78, 14);
-		pnCentral.add(lbQtde);
-		
-		tfQtde = new JTextField();
-		tfQtde.setBounds(126, 136, 86, 20);
-		pnCentral.add(tfQtde);
-		tfQtde.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Valor:");
-		lblNewLabel.setBounds(74, 176, 38, 14);
-		pnCentral.add(lblNewLabel);
-		
-		tfValor = new JTextField();
-		tfValor.setBounds(126, 173, 124, 20);
-		pnCentral.add(tfValor);
-		tfValor.setColumns(10);
 		
 		JPanel pnRodape = new JPanel();
 		pnRodape.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -122,6 +85,59 @@ public class TelaProduto extends JFrame {
 		});
 		
 		pnRodape.add(btGravar);
+		
+		JTabbedPane tpProduto = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tpProduto, BorderLayout.CENTER);
+		
+		JPanel pnCadastro = new JPanel();
+		pnCadastro.setLayout(null);
+		pnCadastro.setBackground(SystemColor.menu);
+		tpProduto.addTab("Cadastro", null, pnCadastro, null);
+		
+		JLabel lbCodigo = new JLabel("C\u00F3digo:");
+		lbCodigo.setBounds(66, 30, 46, 14);
+		pnCadastro.add(lbCodigo);
+		
+		tfCodigo = new JTextField();
+		tfCodigo.setColumns(10);
+		tfCodigo.setBounds(122, 27, 57, 20);
+		pnCadastro.add(tfCodigo);
+		
+		JLabel lbNome = new JLabel("Nome:");
+		lbNome.setBounds(66, 74, 38, 14);
+		pnCadastro.add(lbNome);
+		
+		tfNome = new JTextField();
+		tfNome.setColumns(10);
+		tfNome.setBounds(122, 71, 392, 20);
+		pnCadastro.add(tfNome);
+		
+		JLabel lbQtde = new JLabel("Quantidade:");
+		lbQtde.setBounds(46, 113, 78, 14);
+		pnCadastro.add(lbQtde);
+		
+		tfQtde = new JTextField();
+		tfQtde.setColumns(10);
+		tfQtde.setBounds(123, 110, 86, 20);
+		pnCadastro.add(tfQtde);
+		
+		JLabel lblNewLabel = new JLabel("Valor:");
+		lblNewLabel.setBounds(66, 147, 38, 14);
+		pnCadastro.add(lblNewLabel);
+		
+		tfValor = new JTextField();
+		tfValor.setColumns(10);
+		tfValor.setBounds(122, 144, 124, 20);
+		pnCadastro.add(tfValor);
+		
+		JPanel pnTabela = new JPanel();
+		tpProduto.addTab("Tabela", null, pnTabela, null);
+		pnTabela.setLayout(new BorderLayout(0, 0));
+		
+		tabela = new JTable();
+		tabela.setAutoCreateRowSorter(true);
+		tabela.setModel(Produto.getTableModel());
+		pnTabela.add(tabela, BorderLayout.CENTER);
 	}
 	
 	private void gravaProduto() {

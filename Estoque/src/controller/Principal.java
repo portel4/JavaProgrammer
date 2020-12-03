@@ -1,7 +1,7 @@
 package controller;
 
+import model.Fornecedor;
 import model.Produto;
-import view.TelaProduto;
 
 public class Principal {
 	
@@ -11,8 +11,17 @@ public class Principal {
 		//gravaProdutos();
 		leProdutos();
 		//listaProdutos();
-		new TelaProduto().setVisible(true);
-		
+		//new TelaProduto().setVisible(true);
+		testeFornecedor();		
+	}
+	
+	private static void testeFornecedor() {
+		int codigo = 1;
+		String nome = "Fornecedor Teste";
+		String cnpj = "66443460000100";
+		String telefone = "484-5858-5858-5858=585875575959";
+		Fornecedor f = new Fornecedor(codigo,nome,cnpj,telefone);
+		System.out.println(f);
 	}
 	
 	private static void leProdutos() {
