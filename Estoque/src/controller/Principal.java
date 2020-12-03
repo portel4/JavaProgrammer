@@ -2,6 +2,7 @@ package controller;
 
 import model.Fornecedor;
 import model.Produto;
+import view.TelaProduto;
 
 public class Principal {
 	
@@ -11,8 +12,8 @@ public class Principal {
 		//gravaProdutos();
 		leProdutos();
 		//listaProdutos();
-		//new TelaProduto().setVisible(true);
-		testeFornecedor();		
+		new TelaProduto().setVisible(true);
+		//testeFornecedor();		
 	}
 	
 	private static void testeFornecedor() {

@@ -21,6 +21,7 @@ import model.Produto;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class TelaProduto extends JFrame {
 
@@ -54,37 +55,6 @@ public class TelaProduto extends JFrame {
 		JLabel lbTitulo = new JLabel("Cadastro de Produtos");
 		lbTitulo.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		pnTitulo.add(lbTitulo);
-		
-		JPanel pnRodape = new JPanel();
-		pnRodape.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		contentPane.add(pnRodape, BorderLayout.SOUTH);
-		pnRodape.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btLimpar = new JButton("Limpar");
-		btLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpaTela();
-			}
-		});
-		
-		JButton btListar = new JButton("Listar");
-		btListar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listaProdutos();
-			}
-		});
-		pnRodape.add(btListar);
-		pnRodape.add(btLimpar);
-		
-		JButton btGravar = new JButton("Gravar");
-		
-		btGravar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gravaProduto();
-			}
-		});
-		
-		pnRodape.add(btGravar);
 		
 		JTabbedPane tpProduto = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tpProduto, BorderLayout.CENTER);
@@ -130,14 +100,49 @@ public class TelaProduto extends JFrame {
 		tfValor.setBounds(122, 144, 124, 20);
 		pnCadastro.add(tfValor);
 		
+		JPanel pnRodape = new JPanel();
+		pnRodape.setBounds(0, 216, 585, 37);
+		pnCadastro.add(pnRodape);
+		pnRodape.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		pnRodape.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btLimpar = new JButton("Limpar");
+		btLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpaTela();
+			}
+		});
+		
+		JButton btListar = new JButton("Listar");
+		btListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaProdutos();
+			}
+		});
+		pnRodape.add(btListar);
+		pnRodape.add(btLimpar);
+		
+		JButton btGravar = new JButton("Gravar");
+		
+		btGravar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gravaProduto();
+			}
+		});
+		
+		pnRodape.add(btGravar);
+		
 		JPanel pnTabela = new JPanel();
 		tpProduto.addTab("Tabela", null, pnTabela, null);
 		pnTabela.setLayout(new BorderLayout(0, 0));
 		
+		JScrollPane scrollPane = new JScrollPane();
+		pnTabela.add(scrollPane, BorderLayout.CENTER);
+		
 		tabela = new JTable();
-		tabela.setAutoCreateRowSorter(true);
 		tabela.setModel(Produto.getTableModel());
-		pnTabela.add(tabela, BorderLayout.CENTER);
+		tabela.setAutoCreateRowSorter(true);
+		scrollPane.setViewportView(tabela);
 	}
 	
 	private void gravaProduto() {
