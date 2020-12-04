@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.table.DefaultTableModel;
+
 import dao.FornecedorDAO;
 import util.Valida;
 
@@ -73,7 +75,7 @@ public class Fornecedor {
 
 	public void setCnpj(String cnpj) {
 		if (Valida.CNPJ(cnpj)) {
-		this.cnpj = cnpj;
+			this.cnpj = cnpj;
 		} else {
 			throw new IllegalArgumentException("CNPJ Inválido!");
 		}
@@ -85,6 +87,19 @@ public class Fornecedor {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public static DefaultTableModel getTableModel() {
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("Código");
+		modelo.addColumn("Nome");
+		modelo.addColumn("CNPJ");
+		modelo.addColumn("Telefone");
+		for (Fornecedor e : lista) {
+			String[] s = { String.valueOf(e.getCodigo()), e.getNome(), e.getCnpj(), e.getTelefone() };
+			modelo.addRow(s);
+		}
+		return modelo;
 	}
 
 	@Override
