@@ -14,11 +14,11 @@ import util.CSV;
 // DAO - Data Access Object
 public class ProdutoDAO {
 	
-	private final String arquivo = "D:/Projects/GitHub/JavaProgrammer/Estoque/db/Produto.CSV";
+	private final String ARQUIVO = "D:/Projects/GitHub/JavaProgrammer/Estoque/db/Produto.CSV";
 	
 	public void exportaCSV(List<Produto> lista) {
 		try {
-			BufferedWriter dados = new BufferedWriter(new FileWriter(arquivo));
+			BufferedWriter dados = new BufferedWriter(new FileWriter(ARQUIVO));
 			for (Produto p: lista) {
 				CSV.write(dados, p.getCodigo());
 				CSV.write(dados, p.getNome());
@@ -34,7 +34,7 @@ public class ProdutoDAO {
 	public List<Produto> importaCSV() {
 		List<Produto> lista = new ArrayList<Produto>();
 		try {
-			BufferedReader dados = new BufferedReader(new FileReader(arquivo));
+			BufferedReader dados = new BufferedReader(new FileReader(ARQUIVO));
 			String linha;
 			while ((linha = dados.readLine()) != null) {
 				String[] s = linha.split(",");

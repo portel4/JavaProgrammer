@@ -1,8 +1,12 @@
 package controller;
 
+import java.sql.Connection;
+import java.util.List;
+
+import connection.ConnectionFactory;
+import dao.FornecedorDAO;
 import model.Fornecedor;
 import model.Produto;
-import view.TelaFornecedor;
 
 public class Principal {
 	
@@ -10,10 +14,23 @@ public class Principal {
 		//geraProdutos();
 		//listaProdutos();
 		//gravaProdutos();
-		leProdutos();
+		//leProdutos();
 		//listaProdutos();
 		//new TelaFornecedor().setVisible(true);
-		testeFornecedor();		
+		//testeFornecedor();	
+		testeConexao();
+	}
+	
+	private static void testeConexao() {
+		Connection con = ConnectionFactory.getConnection();
+		if (con == null) System.out.println("Erro na conexão!");
+		else System.out.println("Conexão bem sucedida!");
+		FornecedorDAO dao = new FornecedorDAO();
+		List<Fornecedor> lista = dao.select();
+		for (Fornecedor f: lista) {
+			System.out.println(f);
+		}
+		ConnectionFactory.closeConnection(con);
 	}
 	
 	private static void testeFornecedor() {
