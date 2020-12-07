@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -22,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.Fornecedor;
+import util.Conversao;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -77,6 +80,7 @@ public class TelaFornecedor extends JFrame {
 		pnCadastro.add(lbCdigo);
 		
 		tfCodigo = new JTextField();
+		tfCodigo.setEditable(false);
 		sl_pnCadastro.putConstraint(SpringLayout.NORTH, tfCodigo, -3, SpringLayout.NORTH, lbCdigo);
 		pnCadastro.add(tfCodigo);
 		tfCodigo.setColumns(10);
@@ -169,11 +173,13 @@ public class TelaFornecedor extends JFrame {
 	}
 	
 	private void gravaFornecedor() {
-		int codigo = Integer.parseInt(tfCodigo.getText());
+		int codigo = Conversao.str2int(tfCodigo.getText());
 		String nome = tfNome.getText();
 		String cnpj = tfCNPJ.getText();
 		String telefone = tfTelefone.getText();
-		new Fornecedor(codigo,nome,cnpj,telefone);
+		int key = new Fornecedor(nome,cnpj,telefone).gravar();
+		JOptionPane.showMessageDialog(null, 
+				"Código do Fornecedor: " + key);
 		limpaTela();
 	}
 	

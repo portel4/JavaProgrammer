@@ -20,6 +20,33 @@ public class FornecedorDAO {
 
 	private final String arquivo = "D:/Projects/GitHub/JavaProgrammer/Estoque/db/Fornecedor.CSV";
 
+	public int insert(Fornecedor r) {
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String sql = "INSERT INTO Fornecedor " +
+					 "(Nome,CNPJ,Telefone) " +
+					 "VALUES (?,?,?)";
+		int codigo = 0;
+		con = ConnectionFactory.getConnection();		
+		try {
+			pst = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setString(1,r.getNome());
+			pst.setString(2,r.getCnpj());
+			pst.setString(3,r.getTelefone());
+			pst.executeUpdate();
+			rs = pst.getGeneratedKeys();
+			if (rs.next()) {
+				codigo = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.closeConnection(con,pst,rs);
+		}
+		return codigo;
+	}
+	
 	public List<Fornecedor> select() {
 		List<Fornecedor> lista = new ArrayList<Fornecedor>();
 		Connection con = null;
@@ -39,7 +66,9 @@ public class FornecedorDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-		}
+		} finally {
+			ConnectionFactory.closeConnection(con,pst,rs);
+		}		
 		return lista;
 	}
 

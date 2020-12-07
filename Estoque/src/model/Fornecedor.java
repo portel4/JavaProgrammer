@@ -20,12 +20,16 @@ public class Fornecedor {
 		return lista;
 	}
 
-	public static void gravar() {
+	public static void gravarCSV() {
 		new FornecedorDAO().exportaCSV(lista);
 	}
 
-	public static void carregar() {
+	public static void carregarCSV() {
 		lista = new FornecedorDAO().importaCSV();
+	}
+	
+	public int gravar() {
+		return(new FornecedorDAO().insert(this));
 	}
 
 // Não pode existir na versão final do sistema
@@ -42,7 +46,7 @@ public class Fornecedor {
 		setNome(nome);
 		setCnpj(cnpj);
 		setTelefone(telefone);
-		lista.add(this);
+		//lista.add(this);
 	}
 
 	public int getCodigo() {
@@ -95,7 +99,7 @@ public class Fornecedor {
 		modelo.addColumn("Nome");
 		modelo.addColumn("CNPJ");
 		modelo.addColumn("Telefone");
-		for (Fornecedor e : lista) {
+		for (Fornecedor e : new FornecedorDAO().select()) {
 			String[] s = { String.valueOf(e.getCodigo()), e.getNome(), e.getCnpj(), e.getTelefone() };
 			modelo.addRow(s);
 		}

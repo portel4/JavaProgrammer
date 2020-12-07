@@ -7,6 +7,7 @@ import connection.ConnectionFactory;
 import dao.FornecedorDAO;
 import model.Fornecedor;
 import model.Produto;
+import view.TelaFornecedor;
 
 public class Principal {
 	
@@ -16,9 +17,9 @@ public class Principal {
 		//gravaProdutos();
 		//leProdutos();
 		//listaProdutos();
-		//new TelaFornecedor().setVisible(true);
+		new TelaFornecedor().setVisible(true);
 		//testeFornecedor();	
-		testeConexao();
+		//testeConexao();
 	}
 	
 	private static void testeConexao() {
@@ -37,7 +38,7 @@ public class Principal {
 		int codigo = 1;
 		String nome = "Fornecedor Teste";
 		String cnpj = "06.274.707/0001-72";
-		String telefone = "484-5858-5858-5858=585875575959";
+		String telefone = "(11) 4569-6748";
 		Fornecedor f = new Fornecedor(codigo,nome,cnpj,telefone);
 		System.out.println(f);
 	}
