@@ -46,6 +46,8 @@ public class TelaFornecedor extends JFrame {
 		initComponents();
 		setTitle("Sistema de Controle de Estoque");
 		setLocationRelativeTo(null);  // centralizado
+		// fecha somente a tela e não o sistema
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
 	}
 	
 	private void initComponents() {

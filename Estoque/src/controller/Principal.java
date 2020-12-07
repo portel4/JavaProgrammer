@@ -1,13 +1,14 @@
 package controller;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import connection.ConnectionFactory;
 import dao.FornecedorDAO;
+import model.Entrada;
 import model.Fornecedor;
 import model.Produto;
-import view.TelaFornecedor;
 
 public class Principal {
 	
@@ -17,9 +18,22 @@ public class Principal {
 		//gravaProdutos();
 		//leProdutos();
 		//listaProdutos();
-		new TelaFornecedor().setVisible(true);
+		//new TelaFornecedor().setVisible(true);
 		//testeFornecedor();	
 		//testeConexao();
+		//testaEntrada();
+		new TelaPrincipal().setVisible(true);
+	}
+	
+	private static void testaEntrada() {
+		Produto p = new Produto(1,"HD 2TB Samsung ",10,500);
+		String nome = "Samsung Eletronics";
+		String cnpj = "35.177.496/0001-58";
+		String telefone = "(11) 7777-6748";
+		Fornecedor f = new Fornecedor(nome,cnpj,telefone);
+		Date data = new Date(System.currentTimeMillis());
+		Entrada e = new Entrada(1,p,f,data,"123",10,100);
+		System.out.println(e);
 	}
 	
 	private static void testeConexao() {
