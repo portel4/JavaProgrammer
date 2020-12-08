@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-
-import view.TelaProduto;
 
 public class TelaPrincipal extends JFrame {
 
@@ -72,9 +70,33 @@ public class TelaPrincipal extends JFrame {
 		sl_pnCentral.putConstraint(SpringLayout.NORTH, lbCadastroDeProdutos, 6, SpringLayout.SOUTH, btProduto);
 		sl_pnCentral.putConstraint(SpringLayout.WEST, lbCadastroDeProdutos, 52, SpringLayout.WEST, pnCentral);
 		pnCentral.add(lbCadastroDeProdutos);
+		
+		JButton btnFornecedor = new JButton("");
+		btnFornecedor.setContentAreaFilled(false);
+		btnFornecedor.setBorderPainted(false);
+		sl_pnCentral.putConstraint(SpringLayout.NORTH, btnFornecedor, 25, SpringLayout.NORTH, pnCentral);
+		sl_pnCentral.putConstraint(SpringLayout.WEST, btnFornecedor, 72, SpringLayout.EAST, btProduto);
+		sl_pnCentral.putConstraint(SpringLayout.SOUTH, btnFornecedor, 146, SpringLayout.NORTH, pnCentral);
+		btnFornecedor.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/images/btFornecedor.png")));
+		btnFornecedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				telaFornecedor();
+			}
+		});
+		pnCentral.add(btnFornecedor);
+		
+		JLabel lbCadastroDeFornecedores = new JLabel("Cadastro de Fornecedores");
+		sl_pnCentral.putConstraint(SpringLayout.NORTH, lbCadastroDeFornecedores, 0, SpringLayout.NORTH, lbCadastroDeProdutos);
+		sl_pnCentral.putConstraint(SpringLayout.WEST, lbCadastroDeFornecedores, 113, SpringLayout.EAST, lbCadastroDeProdutos);
+		pnCentral.add(lbCadastroDeFornecedores);
 	}
 	
 	private void telaProduto() {
 		new TelaProduto().setVisible(true);
 	}
+	
+	private void telaFornecedor() {
+		new TelaFornecedor().setVisible(true);
+	}
+
 }

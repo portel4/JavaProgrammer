@@ -9,6 +9,7 @@ import dao.FornecedorDAO;
 import model.Entrada;
 import model.Fornecedor;
 import model.Produto;
+import view.TelaPrincipal;
 
 public class Principal {
 	
@@ -58,7 +59,7 @@ public class Principal {
 	}
 	
 	private static void leProdutos() {
-		Produto.carregar();
+		Produto.carregarCSV();
 	}
 	private static void geraProdutos() {
 		new Produto(1,"Teclado Microsoft Natural",15,180);
@@ -74,7 +75,7 @@ public class Principal {
 	}
 	
 	private static void gravaProdutos() {
-		Produto.gravar();
+		Produto.gravarCSV();
 	}
 	
 }

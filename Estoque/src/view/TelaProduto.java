@@ -18,6 +18,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import model.Produto;
+import util.Conversao;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -69,6 +71,7 @@ public class TelaProduto extends JFrame {
 		pnCadastro.add(lbCodigo);
 		
 		tfCodigo = new JTextField();
+		tfCodigo.setEditable(false);
 		tfCodigo.setColumns(10);
 		tfCodigo.setBounds(122, 27, 57, 20);
 		pnCadastro.add(tfCodigo);
@@ -146,7 +149,7 @@ public class TelaProduto extends JFrame {
 	}
 	
 	private void gravaProduto() {
-		int codigo = Integer.parseInt(tfCodigo.getText());
+		int codigo = Conversao.str2int(tfCodigo.getText());
 		String nome = tfNome.getText();
 		int qtde = Integer.parseInt(tfQtde.getText());
 		double valor = Double.parseDouble(tfValor.getText());
@@ -159,7 +162,7 @@ public class TelaProduto extends JFrame {
 		tfNome.setText("");
 		tfQtde.setText("");
 		tfValor.setText("");
-		tfCodigo.requestFocus();
+		tfNome.requestFocus();
 	}
 	
 	private void listaProdutos() {

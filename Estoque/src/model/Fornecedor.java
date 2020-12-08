@@ -17,7 +17,7 @@ public class Fornecedor {
 	private static List<Fornecedor> lista = new ArrayList<Fornecedor>();
 
 	public static List<Fornecedor> getLista() {
-		return lista;
+		return new FornecedorDAO().select();
 	}
 
 	public static void gravarCSV() {
@@ -99,7 +99,7 @@ public class Fornecedor {
 		modelo.addColumn("Nome");
 		modelo.addColumn("CNPJ");
 		modelo.addColumn("Telefone");
-		for (Fornecedor e : new FornecedorDAO().select()) {
+		for (Fornecedor e: new FornecedorDAO().select()) {
 			String[] s = { String.valueOf(e.getCodigo()), e.getNome(), e.getCnpj(), e.getTelefone() };
 			modelo.addRow(s);
 		}

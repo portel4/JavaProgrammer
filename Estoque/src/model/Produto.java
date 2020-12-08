@@ -16,13 +16,18 @@ public class Produto {
 	private static List<Produto> lista = new ArrayList<Produto>();
 	
 	public static List<Produto> getLista() {
-		return lista;
+		return new ProdutoDAO().select();
 	}
 	
-	public static void gravar() {
+	public int gravar() {
+		int codigo = new ProdutoDAO().insert(this);
+		return codigo;
+	}
+	
+	public static void gravarCSV() {
 		new ProdutoDAO().exportaCSV(lista);
 	}
-	public static void carregar() {
+	public static void carregarCSV() {
 		lista = new ProdutoDAO().importaCSV();
 	}
 
@@ -37,7 +42,7 @@ public class Produto {
 		setNome(nome);
 		setQtde(qtde);
 		setValor(valor);
-		lista.add(this);
+		//lista.add(this);
 	}
 	
 	public int getCodigo() {
@@ -75,7 +80,7 @@ public class Produto {
 		modelo.addColumn("Nome");
 		modelo.addColumn("Quantidade");
 		modelo.addColumn("Valor");
-		for (Produto p: lista) {
+		for (Produto p: getLista()) {
 			String[] s = { String.valueOf(p.getCodigo()),
 						   p.getNome(),
 						   String.valueOf(p.getQtde()),

@@ -16,10 +16,11 @@ import connection.ConnectionFactory;
 import model.Fornecedor;
 import util.CSV;
 
-public class FornecedorDAO {
+public class FornecedorDAO implements DAO<Fornecedor>{
 
 	private final String arquivo = "D:/Projects/GitHub/JavaProgrammer/Estoque/db/Fornecedor.CSV";
 
+	@Override
 	public int insert(Fornecedor r) {
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -47,6 +48,7 @@ public class FornecedorDAO {
 		return codigo;
 	}
 	
+	@Override	
 	public List<Fornecedor> select() {
 		List<Fornecedor> lista = new ArrayList<Fornecedor>();
 		Connection con = null;
@@ -108,6 +110,18 @@ public class FornecedorDAO {
 			System.out.println(e.getMessage());
 		}
 		return lista;
+	}
+
+	@Override
+	public boolean update(Fornecedor r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
