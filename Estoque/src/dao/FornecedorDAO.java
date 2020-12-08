@@ -120,8 +120,23 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 
 	@Override
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = false;
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String sql = "DELETE FROM Fornecedor WHERE Codigo = ?";
+		con = ConnectionFactory.getConnection();
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1,id);
+			pst.execute();
+			ok = true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			ConnectionFactory.closeConnection(con,pst,rs);
+		}		
+		return ok;
 	}
 
 }

@@ -28,6 +28,11 @@ public class Fornecedor {
 		lista = new FornecedorDAO().importaCSV();
 	}
 	
+	public static boolean excluir(int id) {
+		boolean ok = new FornecedorDAO().delete(id);
+		return ok;
+	}
+	
 	public int gravar() {
 		return(new FornecedorDAO().insert(this));
 	}
@@ -100,7 +105,10 @@ public class Fornecedor {
 		modelo.addColumn("CNPJ");
 		modelo.addColumn("Telefone");
 		for (Fornecedor e: new FornecedorDAO().select()) {
-			String[] s = { String.valueOf(e.getCodigo()), e.getNome(), e.getCnpj(), e.getTelefone() };
+			String[] s = { String.valueOf(e.getCodigo()), 
+										  e.getNome(), 
+										  e.getCnpj(), 
+										  e.getTelefone() };
 			modelo.addRow(s);
 		}
 		return modelo;

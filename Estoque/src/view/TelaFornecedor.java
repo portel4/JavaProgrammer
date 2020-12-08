@@ -1,33 +1,31 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.JTabbedPane;
-import java.awt.SystemColor;
-import javax.swing.SpringLayout;
-import javax.swing.JTextField;
-import javax.swing.border.EtchedBorder;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import model.Fornecedor;
 import util.Conversao;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaFornecedor extends JFrame {
 
@@ -44,6 +42,7 @@ public class TelaFornecedor extends JFrame {
 	 */
 	public TelaFornecedor() {
 		initComponents();
+		configuraTabela();
 		setTitle("Sistema de Controle de Estoque");
 		setLocationRelativeTo(null);  // centralizado
 		// fecha somente a tela e não o sistema
@@ -129,7 +128,7 @@ public class TelaFornecedor extends JFrame {
 		tpFornecedor.addTab("Tabela", null, pnTabela, null);
 		
 		tabela = new JTable();
-		tabela.setModel(Fornecedor.getTableModel());
+		atualizaTabela();
 		pnTabela.setViewportView(tabela);
 		
 		JPanel pnRodape = new JPanel();
@@ -159,7 +158,28 @@ public class TelaFornecedor extends JFrame {
 				gravaFornecedor();
 			}
 		});
+		
+		JButton btExcluir = new JButton("Excluir");
+		btExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluiFornecedor();
+			}
+		});
+		pnRodape.add(btExcluir);
 		pnRodape.add(btGravar);
+	}
+	
+	private void excluiFornecedor() {
+		int linha = tabela.getSelectedRow();
+		String codigo = tabela.getModel().getValueAt(linha,0).toString();
+		String nome = tabela.getModel().getValueAt(linha,1).toString();
+		int id = Integer.parseInt(codigo);
+		boolean ok = Fornecedor.excluir(id);
+		atualizaTabela();
+		if (ok) {
+			JOptionPane.showMessageDialog(null, 
+					"Fornecedor [" + nome + "] excluído com sucesso!");
+		}
 	}
 	
 	private void listaFornecedores() {
@@ -180,9 +200,27 @@ public class TelaFornecedor extends JFrame {
 		String cnpj = tfCNPJ.getText();
 		String telefone = tfTelefone.getText();
 		int key = new Fornecedor(nome,cnpj,telefone).gravar();
+		atualizaTabela();
 		JOptionPane.showMessageDialog(null, 
 				"Código do Fornecedor: " + key);
 		limpaTela();
+	}
+	
+	private void atualizaTabela() {
+		tabela.setModel(Fornecedor.getTableModel());		
+	}
+	
+	private void configuraTabela() {
+		DefaultTableCellRenderer central = new DefaultTableCellRenderer();
+		central.setHorizontalAlignment(SwingConstants.CENTER);
+		tabela.getTableHeader().setDefaultRenderer(central);
+		tabela.getTableHeader().setOpaque(false);
+		tabela.getTableHeader().setBackground(Color.blue);
+		tabela.getColumnModel().getColumn(0).setCellRenderer(central);
+		tabela.getColumnModel().getColumn(2).setCellRenderer(central);
+		tabela.getColumnModel().getColumn(3).setCellRenderer(central);
+		tabela.getColumnModel().getColumn(0).setMaxWidth(50);
+		tabela.getColumnModel().getColumn(1).setMinWidth(200);
 	}
 	
 }
